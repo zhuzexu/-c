@@ -1,25 +1,27 @@
-/*
-* Copyrigith(C) Insta360 2021-2022
-* Description : 
-* Author      ：
-* Create      :
-* Notes       : 1.
-*	              2.
-*/
+/**
+ * Copyrigith(C) Insta360 2021-2022
+ * Description : 
+ * Author      ：
+ * Create      :
+ * Notes       : 1.
+ *	              2.
+ */
 
 
-/*
-* Func      : 
-* Param in  ：  aaa  xxxxx
-*               bbb  xxxxx
-* Param out :
-* ret       :
-*/
+/**
+ * Func      : 
+ * @Param1   ：[in]  xxxxxxx
+ * @Param2   : [out] xxxxxxx
+ * ret       :
+ */
 
 
 其他注释统一风格 /* xxx */ FIXME,XXX,TODO，成员、宏定义可以放在右侧。
-
-
+/*
+ * aaaaaaaaaaaaaa
+ * bbbbbbbbbbbbbb
+ */
+ 
 提高代码可读性：
 1. 尽量用宏去表示掩码，常量，枚举成员等，实现基本的字符串替换和字符拼接功能。
 2. 枚举成员要有首尾指示。
