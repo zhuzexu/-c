@@ -37,7 +37,7 @@
 					     son.func_son(&son, param1, param2);
 										  
        3.作为可多实例化的类，包含两种（工具类、高度抽象的父类），无对象类的常规操作。
-         4个接口：	class_init           
+         4个接口:    class_init           
 		    class_deinit
                     class_create										  
 		    class_destroy	
