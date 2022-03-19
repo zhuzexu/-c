@@ -1,0 +1,55 @@
+socket应答响应机制实现：
+    主要是可以实现客户端可能多个线程同时发送请求，而在等待回复时，可以根据request_id通知是回复哪一路的请求，并把请求内容保存下来使用。  《request_id实现一套socket多路复用》
+    
+    
+    具体方式：
+    首先定义通信协议（从简）   
+                typedef struct msg_header_s 
+                {
+                    uint32_t header;             /* 指定0x5555或0xaaaa */
+                    uint32_t cmd;                /* 命令:应用层定义 */
+                    uint32_t type;               /* 请求/响应 */
+                    uint32_t req_id;             /* 请求id */
+                    int32_t rsp_val;             /* 请求的返回值 */
+                    uint32_t codec_type;         /* none-json-protobuf ... */
+                    uint32_t payload_len;        /* 负载长度 */
+                } msg_header_t;
+
+                #define MSG_HEADR_SIZE    sizeof(msg_header_t)
+
+                typedef struct msg_buff_s 
+                {
+                    msg_header_t msg_header;
+                    void *payload;
+                } msg_buff_s;
+    
+    
+    
+    
+    client异步收发  《======》 server异步收并回复。
+    
+       client端伪代码:
+                sender();
+                local_id = send_req_id;
+                while(local_id != g_id)
+                  pthread_cond_timedwait;
+                local_response = g_response;
+                //TODO
+                
+                //收消息线程
+                receiver();
+                g_response = recv_response;
+                g_id = recv_req_id;
+                pthread_cond_signal;
+                
+       server端伪代码:
+                //收消息线程
+                receiver();
+                // do something;
+                rsp_val = xxx; 
+                type = 回复；
+                req_id = recv_id;
+                sender;
+              
+                 
+                 
