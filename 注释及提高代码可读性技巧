@@ -7,12 +7,14 @@
  *	              2.
  */
 
-
+ 
 /**
- * Func      : 
- * @Param1   ：[in]  xxxxxxx
- * @Param2   : [out] xxxxxxx
- * ret       :
+ * func          : dump the hex format data to log
+ * @param name   ：[in] name for hex object, it will show on log header
+ * @param width  : [in] hex number for every line, such as: 16, 32
+ * @param buf    : [in] hex buffer
+ * @param size   : [in] buffer size
+ * ret           :
  */
 
 
