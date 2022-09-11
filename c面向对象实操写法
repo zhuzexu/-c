@@ -22,7 +22,7 @@
 	要做到 @继承（直接使用父类方法）、@重写父类方法（父类接口有set_interface用于修改默认方法，或者用于动态更换其他接口，子类实现父类接口写法参考感悟）、@多态(对象或子类对象接口赋值多态)。
 		 
         分为两类 <a>子类不增加接口或属性的多态：即父类的纯对象，此类只好新建对象.c .h。
-                   父类对象.h 3个接口：  object_init（调用父类init）              object_create
+                   新建对象.h 3个接口：  object_init（调用父类init）              object_create
 	                                object_deinit（调用父类deinit）   或     object_destroy
 			                object_get_handler   
 		 
@@ -36,7 +36,17 @@
 					     pfarther->func_farther(pfarther, param1, param2);
 					     son.func_son(&son, param1, param2);
 										  
-       3.作为可多实例化的类，包含两种（工具类、高度抽象的父类），无对象类的常规操作。
+       
+       3.  2<a>中比较特殊<对象多个>: 绝大部分的接口是虚类的，否则就是2<a>. 此种类型用常规方式init的话参数繁琐且无效难看！其中又分为两类：抽象类中全部虚接口和绝大部分虚接口。
+	   
+	   编写形式：各个对象.h直接使用虚接口.h（不新建），若有少部分公共已实现方法可以单独新建个公共.c或者直接虚接口.h加inline包含。
+	             各个对象.c 实现自己的方法，直接静态全局变量方式。虚接口.h中数组管理调用使用（extern出来！）。简单直观。
+		     或者动态方式init中用自己的方法直接初始化各个虚类接口，对外提供init/deinit/get_handler接口头，也可以直接放在虚接口.h中共同管理（extern出来！）。
+		     
+		     初衷：尽量少建无用文件。
+       
+       
+       4.作为可多实例化的类，包含两种（工具类、高度抽象的父类），无对象类的常规操作。
          4个接口:    class_init           
 		    class_deinit
                     class_create										  
